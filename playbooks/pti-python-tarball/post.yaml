@@ -22,11 +22,9 @@
     - name: Collect tarball artifacts.
       fetch:
         dest: "{{ zuul.executor.work_root }}/artifacts/"
-        src: "{{ zj_tb.path }}"
+        src: "{{ item.path }}"
         flat: true
-      loop: "{{ result.files }}"
-      loop_control:
-        loop_var: zj_tb
+      with_items: "{{ result.files }}"
 
 - hosts: localhost
   roles:
